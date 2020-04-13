@@ -1,0 +1,2 @@
+# CrashCensor
+record crash(swift)
