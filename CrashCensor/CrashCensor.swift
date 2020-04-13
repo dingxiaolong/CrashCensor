@@ -83,6 +83,7 @@ class CrashEye: NSObject {
             return
         }
         var stack = Thread.callStackSymbols
+        stack.removeFirst(2)
         let callStack = stack.joined(separator: "\r")
         let crashName = CrashEye.name(of: sinnal)
         let reason = "Signal \(crashName) was rasied. \n"
@@ -125,7 +126,7 @@ class CrashEye: NSObject {
         let deviceModel = UIDevice.current.model
         let systemName = UIDevice.current.systemName
         let systemVersion = UIDevice.current.systemVersion
-        let tmpStr = "App" + displayName + shortVersion + "\n" + "Device:" + deviceModel + "\n" + "OS Version:\(systemName) \(systemVersion)"
+        let tmpStr = "App:" + displayName + shortVersion + "\n" + "Device:" + deviceModel + "\n" + "OS Version:\(systemName) \(systemVersion)"
         return tmpStr
     }
     

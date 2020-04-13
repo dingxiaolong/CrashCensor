@@ -14,22 +14,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         CrashEye.shareInstance.add(delegate: self)
 
-        let test = UserDefaults.standard.value(forKey: "test")
-        if test != nil {
+        let test = UserDefaults.standard.value(forKey: "test") as? String ?? ""
+        if test != nil || test != "" {
             print(test)
         }
         
         
         let array = [Int]()
-        array[1]
-        
-        
+        array[1]        
     }
 }
 
 extension ViewController: CrashCensorDelegate {
     func crashEyeDidCatchCrash(model: CrashModel) {
-        UserDefaults.standard.setValue(model, forKey: "test")
+        let string = "名字:" + model.name + "\r" + "原因:" + model.reason + "\r" + "app信息:" + model.appinfo + "\r" + "堆栈信息:" + model.callStack
+        UserDefaults.standard.setValue(string, forKey: "test")
         UserDefaults.standard.synchronize()
         print(model)
     }
